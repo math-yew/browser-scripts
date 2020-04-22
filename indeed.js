@@ -1,9 +1,18 @@
 function m(){
+  console.log("___________________________");
+  try{
+    var company = document.getElementById("vjs-cn").getElementsByTagName("a")[0].innerText;
+  }
+  catch(e){
+    var company = document.getElementById("vjs-cn").innerText;
+  }
+  console.log("COMPANY: " + company);
   var words = {
-    red: "php perl java c# .net",
+    blue: "remote",
     yellow: "angular node javascript",
-    orange: "react",
-    blue: "remote"
+    red: "java php docker c# .net",
+    orange: "react python",
+    green:"year contract"
   }
   for(key in words){
     let color = key;
@@ -25,6 +34,8 @@ function m(){
         }
       }
     }
+    console.log("- - - - - - - - - - - - - - - ")
   }
 }
+// document.getElementsByClassName("clickcard").addEventListener("click", m);
 m();
