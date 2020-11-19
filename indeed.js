@@ -1,10 +1,15 @@
 function m(){
   console.log("___________________________");
+  var myClass = "jobsearch-ViewJobLayout-innerContent";
+  myClass = "jobsearch-ViewJobLayout";
   try{
-    var company = document.getElementById("vjs-cn").getElementsByTagName("a")[0].innerText;
+    // var company = document.getElementById("vjs-cn").getElementsByTagName("a")[0].innerText;
+    var company = document.getElementsByClassName(myClass)[0].getElementsByTagName("a")[0].innerText;
   }
   catch(e){
-    var company = document.getElementById("vjs-cn").innerText;
+    // try{var company = document.getElementById("vjs-cn").innerText;}
+    try{var company = document.getElementsByClassName(myClass)[0].innerText;}
+    catch(e){company = ""}
   }
   console.log("COMPANY: " + company);
   var words = {
@@ -22,7 +27,11 @@ function m(){
       var re = new RegExp(str, 'gi');
       var el = ["p","li"];
       for (var j=0;j<el.length;j++){
-        var all = document.getElementById("vjs-container").getElementsByTagName(el[j]);
+        var searchDiv = document.getElementById("vjs-container")
+        if(!searchDiv){
+          searchDiv = document.getElementById("jobDescriptionText")
+        }
+        var all = searchDiv.getElementsByTagName(el[j]);
         for(var i=0;i<all.length;i++){
           var text = all[i].innerHTML;
           var newText = text.replace(re, "<span style='background-color:"+color+"'>"+str+"</span>");
