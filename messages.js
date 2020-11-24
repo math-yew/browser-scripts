@@ -1,61 +1,45 @@
-console.log("MESSAGES!")
-let list1 = ["our","his","her"];
-let list2 = ["dog","cat","llama"];
-let list3 = ["jumped","sat","flew"];
-
-let together = [list1, list2, list3];
-
-let wordss = {
-  0: ["a"],
-  1: ["c","d"],
-  2: ["m","n"],
-  3: ["x","y"]
+let wordsz = {
+  0: ["our ","his ","her "],
+  1: ["dog ","cat ","llama "],
+  2: ["jumped","sat","flew"]
 }
 
 let words = {
-  0: ["a","b"],
-  1: ["c","d"]
+  0: ["a","b","c","d"],
+  1: ["m","n","o","p"],
+  2: ["r","s","t","u"],
+  3: ["w","x","y","z"]
 }
-
 
 let skeleton = [];
 for (arr in words){
   skeleton.push(words[arr].length);
-  console.log(words[arr][0]);
 }
-console.log(skeleton);
+let combos = [];
 
-function increment(sk,state){
-  console.log(sk + " : " + state);
-  let num = sk[0];
-  sk.shift();
-  for (var i = 0; i < num; i++) {
-    console.log(sk.length + 1 + " | " + "STATE: " + state);
+function increment(_sk,state){
+  let num = _sk[0];
+  let sk = _sk.slice(1);
+  for (let i = 0; i < num; i++) {
+    if(i > 0){
+      state.pop();
+    }
+    state.push(i);
 
     if(sk.length>0){
-      if(i > 0){
-        state.pop();
-      }
-      state.push(i);
-      increment(sk,state);
+      increment(sk,[...state]);
     } else {
-      if(i > 0){
-        state.pop()
-      }
-      state.push(i);
       let str = "";
       state.map((e,i)=>{
         str += words[i][e];
       });
-      console.log(state + " : " + str);
-    }
-
-    if(i == num - 1){
-      state.pop();
-      state.push(0);
+      // console.log("str : " + str);
+      combos.push(str);
     }
 
   }
 }
 
 increment(skeleton,[]);
+console.log(combos);
+console.log(combos.length);
