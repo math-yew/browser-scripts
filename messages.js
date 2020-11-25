@@ -11,13 +11,21 @@ let words = {
   3: ["w","x","y","z"]
 }
 
+let colArr = [];
+for(key in words){
+  colArr.push(key);
+}
+let columns = {};
+colArr.map((e)=>columns[e] = colArr);
+
 let skeleton = [];
 for (arr in words){
   skeleton.push(words[arr].length);
 }
+
 let combos = [];
 
-function increment(_sk,state){
+function increment(_sk,state,name){
   let num = _sk[0];
   let sk = _sk.slice(1);
   for (let i = 0; i < num; i++) {
@@ -27,19 +35,21 @@ function increment(_sk,state){
     state.push(i);
 
     if(sk.length>0){
-      increment(sk,[...state]);
+      increment(sk,[...state],name);
     } else {
       let str = "";
       state.map((e,i)=>{
         str += words[i][e];
       });
       // console.log("str : " + str);
-      combos.push(str);
+      if(name == "combos") {
+        combos.push(str);
+      }
     }
 
   }
 }
 
-increment(skeleton,[]);
+increment(skeleton,[],"combos");
 console.log(combos);
 console.log(combos.length);
