@@ -5,6 +5,13 @@ let wordsz = {
 }
 
 let words = {
+  0: ["I'm new to Tiktok. ","I haven't been on Tiktok that long. ", "Tiktok is pretty new to me. ", "I just joined Tiktok a short time ago. ", "I'm still getting to know how Tiktok works. ", "I'm just starting to get aquatinted with Tiktok. "],
+  1: ["I noticed that we both follow so and so. ", "I see that you also follow so and so. ", "so and so's videos are pretty funny, I see you also follow him. ", "It looks like we both like videos from so and so. ", "It looks like we both follow so and so. "],
+  2: ["Do you have any suggestions for following people who sing funny songs? ", "Who, if anyone, would you recommend to follow who also makes up funny songs? ", "Any recommendations for people to follow who sing funny songs? ", "Who sings funny songs that would be good to follow? "],
+  3: ["I want to find more music like mine. ", "I'm looking for more songs like mine. ",  "I want to follow more songwriters like me. ", "I want to see more Tiktoks in my feed that are similar to mine. "]
+}
+
+let words1 = {
   0: ["a","b","c","d"],
   1: ["m","n","o","p"],
   2: ["r","s","t","u"],
@@ -90,7 +97,16 @@ increment(skeleton,[],"combos");
 console.log(combos);
 console.log(combos.length);
 
-let nonRepeat = [...new Set(combos)];
+let rearranged = [];
+
+while(combos.length > 0){
+  let remaining = combos.length;
+  let picked = Math.floor(Math.random()*remaining);
+  let item = combos.splice(picked,1)[0];
+  rearranged.push('"'+item+'"');
+}
+
+let nonRepeat = [...new Set(rearranged)];
 console.log(nonRepeat);
 console.log(nonRepeat.length);
 
