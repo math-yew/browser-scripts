@@ -3,28 +3,29 @@
   <head>
     <meta charset="utf-8">
     <title></title>
-  </head>
-  <body>
-    <h1>Hi</h1>
     <script src="token.js" type="text/javascript"></script>
     <script type="module">
       import { Octokit } from "https://cdn.skypack.dev/@octokit/core";
-      // const TOKEN = "1005f209a1add035b1d1f6df0941d42980ec77a4";
       const octokit = new Octokit({ auth: TOKEN });
-      async function asyncCall() {
-      const response = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
-        owner: 'math-yew',
-        repo: 'arrow',
-        path: 'pictures.css'
-      });
-      console.log("response: " + JSON.stringify(response));
-      console.log("status: " + JSON.stringify(response.status));
-      let content = atob(response.data.content);
-      console.log("content: " + JSON.stringify(content));
-    }
-    asyncCall();
+      async function getFile() {
+        const response = await octokit.request('GET /repos/{owner}/{repo}/contents/{path}', {
+          owner: 'math-yew',
+          repo: 'arrow',
+          path: 'pictures.css'
+        });
+        console.log("response: " + JSON.stringify(response));
+        console.log("status: " + JSON.stringify(response.status));
+        let content = atob(response.data.content);
+        console.log("content: " + JSON.stringify(content));
+      }
+      document.getElementById('get').addEventListener("click",()=>getFile());
+    // asyncCall();
+    </script>
+  </head>
+  <body>
+    <h1>Hi</h1>
+    <button type="button" name="button" id="get">GET</button>
 
-</script>
     <script src="remoteData.js" type="text/javascript"></script>
   </body>
 </html>
