@@ -26,10 +26,10 @@
         prep();
       }
       let str = '{"title": "chicken","description": "fries"}';
-
+      let newStr;
 
       async function putFile() {
-        let newContent = btoa(str);
+        let newContent = btoa(newStr);
         const response = await octokit.request('PUT /repos/{owner}/{repo}/contents/{path}', {
           owner: 'math-yew',
           repo: 'browser-scripts',
@@ -41,13 +41,26 @@
         console.log("response: " + JSON.stringify(response));
       }
       document.getElementById('get').addEventListener("click",()=>getFile());
-      document.getElementById('put').addEventListener("click",()=>putFile());
+      document.getElementById('put').addEventListener("click",()=>encode());
 
       function prep(){
         for (let key in obj){
           $("#changes").append("<p>" + key + "</p>");
           $("#changes").append("<textarea class='data' id='" + key + "'>" + obj[key] + "</textarea>");
         }
+      }
+
+      function encode(){
+        let newObj = {};
+        let arr = $(".data");
+        for (var i = 0; i < arr.length; i++) {
+          console.log("id: " + arr[i].id);
+          console.log("val: " + arr[i].value);
+          newObj[arr[i].id] = arr[i].value;
+        }
+        newStr = JSON.stringify(newObj);
+        console.log("newObj: " + newStr);
+        putFile();
       }
     </script>
   </head>

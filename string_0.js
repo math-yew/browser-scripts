@@ -1,0 +1,2 @@
+var str = ``;
+var str = ``;
